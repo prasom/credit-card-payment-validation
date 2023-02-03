@@ -1,85 +1,142 @@
 <div
-  class="shadow-lg shadow-gray-700 bg-transparent w-[30rem] h-[220px] ml-auto mr-auto mt-10 z-30 flex flex-col rounded-xl"
+  class="shadow-lg shadow-gray-700 bg-transparent w-[30rem] h-[260px] ml-auto mr-auto mt-10 z-30 flex flex-col rounded-xl"
 >
   <div class="h-2/4 rounded-t-xl flex flex-col justify-end pb-2">
     <img class="w-20 ml-2" src="assets/card_logo.png" alt="" srcset="" />
   </div>
   <div class="bg-bgcard h-2/4 flex flex-col px-4 pt-8 gap-2 rounded-b-xl">
     <div class="flex justify-between">
-      <p class="text-white font-bold">1000000000000</p>
-      <p class="text-white font-bold text-xs">12/24</p>
+      <p class="text-white text-lg font-bold">{{ cardNumber }}</p>
+      <p class="text-white text-xs">{{ expireDate }}</p>
     </div>
-    <div><p class="text-white font-bold">JOHN DOE</p></div>
+    <div>
+      <p class="text-white text-sm font-medium">{{ cardHolderName }}</p>
+    </div>
   </div>
 </div>
-<div
+<form
+  [formGroup]="reactiveForm"
   class="shadow-2xl min-h-[100px] min-w-[300px] w-5/6 h-auto ml-auto mr-auto mt-[-40px] pb-20 pt-[90px]"
 >
-  <div class="w-2/4 ml-auto mr-auto flex flex-col gap-6">
+  <div class="w-5/12 ml-auto mr-auto flex flex-col gap-8">
     <div>
       <input
         type="text"
-        id="default-input"
-        data-test-id=""
+        id="number-input"
+        data-test-id="number-input"
         placeholder="Card Number"
+        formControlName="cardNumber"
+        maxlength="16"
         class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
       />
+      <p
+        *ngIf="
+          reactiveForm.get('cardNumber')?.touched &&
+          reactiveForm.get('cardNumber')?.invalid
+        "
+        data-test-id="numberinput-error"
+      >
+        Invalid Card Number
+      </p>
     </div>
 
     <div>
       <input
         type="text"
-        id="default-input"
-        data-test-id=""
+        id="name-input"
+        data-test-id="name-input"
         placeholder="Cardholder Name"
+        formControlName="cardHolderName"
         class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
       />
+      <p
+        *ngIf="
+          reactiveForm.get('cardHolderName')?.touched &&
+          reactiveForm.get('cardHolderName')?.invalid
+        "
+        data-test-id="nameinput-error"
+      >
+        Invalid Cardholder Name
+      </p>
     </div>
 
     <div class="flex flex-row gap-4">
-      <div>
+      <div class="flex-1">
         <input
           type="text"
           maxlength="2"
-          id="default-input"
-          data-test-id=""
+          id="month-input"
+          data-test-id="month-input"
+          formControlName="expireMonth"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
-        <label for="default-input" class="block mb-2 mt-2 text-sm text-gray-400"
+        <label for="month-input" class="block mb-1 mt-2 text-sm text-gray-400"
           >Expire Month</label
         >
+        <p
+          *ngIf="
+            reactiveForm.get('expireMonth')?.touched &&
+            reactiveForm.get('expireMonth')?.invalid
+          "
+          data-test-id="monthinput-error"
+        >
+          Invalid Month
+        </p>
       </div>
-      <div>
+      <div class="flex-1">
         <input
           type="text"
           maxlength="4"
-          id="default-input"
-          data-test-id=""
+          id="year-input"
+          data-test-id="year-input"
+          formControlName="expireYear"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
-        <label for="default-input" class="block mb-2 mt-2 text-sm text-gray-400"
+        <label for="year-input" class="block mb-1 mt-2 text-sm text-gray-400"
           >Expire Year</label
         >
+        <p
+          *ngIf="
+            reactiveForm.get('expireYear')?.touched &&
+            reactiveForm.get('expireYear')?.invalid
+          "
+          data-test-id="yearinput-error"
+        >
+          Invalid Year
+        </p>
       </div>
-      <div>
+      <div class="flex-1">
         <input
           type="text"
           maxlength="3"
-          id="default-input"
-          data-test-id=""
+          id="cvv-input"
+          data-test-id="cvv-input"
+          formControlName="cvvNumber"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
-        <label for="default-input" class="block mb-2 mt-2 text-sm text-gray-400"
+        <label for="cvv-input" class="block mb-1 mt-2 text-sm text-gray-400"
           >CVV/CVC</label
         >
+        <p
+          *ngIf="
+            reactiveForm.get('cvvNumber')?.touched &&
+            reactiveForm.get('cvvNumber')?.invalid
+          "
+          data-test-id="cvvinput-error"
+        >
+          Invalid CVV/CVC.
+        </p>
       </div>
     </div>
 
     <button
-      disabled="true"
-      class="bg-bgcard text-white font-bold py-2 px-4 rounded-md shadow-lg shadow-bgcard opacity-70"
+      id="submit-button"
+      data-test-id="submit-button"
+      [disabled]="reactiveForm.invalid"
+      [class.opacity-70]="reactiveForm.invalid"
+      class="bg-bgcard text-white font-bold py-2 px-4 rounded-md shadow-lg shadow-bgcard"
     >
       Submit
     </button>
   </div>
-</div>
+</form>

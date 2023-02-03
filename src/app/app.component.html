@@ -1,4 +1,8 @@
-<app-credit-card-view [cardNumber]="cardNumber" [expireDate]="expireDate" [cardHolderName]="cardHolderName"></app-credit-card-view>
+<app-credit-card-view
+  [cardNumber]="cardNumber"
+  [expireDate]="expireDate"
+  [cardHolderName]="cardHolderName"
+></app-credit-card-view>
 <form
   [formGroup]="reactiveForm"
   class="shadow-2xl min-h-[100px] min-w-[300px] w-5/6 h-auto ml-auto mr-auto mt-[-40px] pb-20 pt-[90px]"
@@ -8,7 +12,7 @@
       <input
         type="text"
         id="number-input"
-        data-test-id="number-input"
+        data-testid="number-input"
         placeholder="Card Number"
         formControlName="cardNumber"
         maxlength="16"
@@ -19,7 +23,7 @@
           reactiveForm.get('cardNumber')?.touched &&
           reactiveForm.get('cardNumber')?.invalid
         "
-        data-test-id="numberinput-error"
+        data-testid="number-input-error"
       >
         Invalid Card Number
       </p>
@@ -29,7 +33,7 @@
       <input
         type="text"
         id="name-input"
-        data-test-id="name-input"
+        data-testid="name-input"
         placeholder="Cardholder Name"
         formControlName="cardHolderName"
         class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
@@ -39,7 +43,7 @@
           reactiveForm.get('cardHolderName')?.touched &&
           reactiveForm.get('cardHolderName')?.invalid
         "
-        data-test-id="nameinput-error"
+        data-testid="name-input-error"
       >
         Invalid Cardholder Name
       </p>
@@ -51,7 +55,7 @@
           type="text"
           maxlength="2"
           id="month-input"
-          data-test-id="month-input"
+          data-testid="month-input"
           formControlName="expireMonth"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
@@ -63,7 +67,7 @@
             reactiveForm.get('expireMonth')?.touched &&
             reactiveForm.get('expireMonth')?.invalid
           "
-          data-test-id="monthinput-error"
+          data-testid="month-input-error"
         >
           Invalid Month
         </p>
@@ -73,7 +77,7 @@
           type="text"
           maxlength="4"
           id="year-input"
-          data-test-id="year-input"
+          data-testid="year-input"
           formControlName="expireYear"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
@@ -85,7 +89,7 @@
             reactiveForm.get('expireYear')?.touched &&
             reactiveForm.get('expireYear')?.invalid
           "
-          data-test-id="yearinput-error"
+          data-testid="year-input-error"
         >
           Invalid Year
         </p>
@@ -95,7 +99,7 @@
           type="text"
           maxlength="3"
           id="cvv-input"
-          data-test-id="cvv-input"
+          data-testid="cvv-input"
           formControlName="cvvNumber"
           class="bg-gray-50 border border-gray-300 text-sm rounded-sm block w-full p-2.5"
         />
@@ -107,16 +111,16 @@
             reactiveForm.get('cvvNumber')?.touched &&
             reactiveForm.get('cvvNumber')?.invalid
           "
-          data-test-id="cvvinput-error"
+          data-testid="cvv-input-error"
         >
-          Invalid CVV/CVC.
+          Invalid CVV/CVC
         </p>
       </div>
     </div>
 
     <button
       id="submit-button"
-      data-test-id="submit-button"
+      data-testid="submit-button"
       [disabled]="reactiveForm.invalid"
       [class.opacity-70]="reactiveForm.invalid"
       class="bg-bgcard text-white font-bold py-2 px-4 rounded-md shadow-lg shadow-bgcard"
